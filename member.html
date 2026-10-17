@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Business Unit 3 · Creative Member Portfolios | JEENISo</title>
+  <meta name="description" content="Meet the manager and creative members of JEENISo Business Unit 3. Explore ideas, projects, experience, events, certifications, and contact." />
+  <link rel="icon" href="images/favicon.png" type="image/png" />
+
+  <!-- Montserrat font from Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;450;500;550;600;650;700;750;800&display=swap" />
+
+  <!-- Our styles -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<!--
+  MEMBER PORTFOLIO PAGE
+  ---------------------
+  - member.html : the skeleton (structure) of the page.
+  - style.css   : colors, fonts, layout, animations.
+  - data.js     : the members and portfolio content (EDIT THIS to add people/projects).
+  - common.js   : helpers + icons shared with the home page (index.html).
+  - member.js   : fills the page with the data and makes it interactive.
+
+  Elements marked  data-icon="..."  are replaced by an SVG icon by common.js.
+  Elements with an  id="..."  and no content are filled in by member.js.
+
+  To see another member, open:  member.html?member=amal-hamdi
+  The home page (index.html) links to every member.
+-->
+<body>
+  <div class="creative-page" id="page">
+
+    <!-- ============ HEADER ============ -->
+    <header class="creative-header">
+      <div class="header-left">
+        <button class="btn btn-ghost brand-link" id="home-button" aria-label="JEENISo home">JE<span>ENISo</span></button>
+        <span class="header-divider"></span>
+        <!-- Save the BU3 logo as images/bu3_logo.png (see README). If it's missing, it hides itself. -->
+        <img src="images/bu3_logo.png" alt="Business Unit 3 logo" class="header-logo" onerror="this.onerror=null;this.src='images/favicon.png'" />
+        <span class="header-unit">BUSINESS<br />UNIT 3</span>
+      </div>
+      <div class="header-right">
+        <a class="btn btn-ghost connect-link" href="index.html">Home</a>
+        <span class="header-note">A collective of curious minds.</span>
+        <button class="btn btn-ghost connect-link" id="open-members"><i data-icon="users"></i> Members</button>
+        <button class="btn btn-ghost connect-link" id="open-contact-header">Say hello <i data-icon="arrow-up-right"></i></button>
+      </div>
+    </header>
+
+    <main>
+      <!-- ============ HERO / STAGE ============ -->
+      <section class="creative-stage" aria-label="Member portfolio">
+        <div class="stage-meta">
+          <span class="live-mark"></span>
+          JEENISo / <span id="spotlight-label">MEMBER SPOTLIGHT</span>
+          <span class="edition">2026 — 2027</span>
+        </div>
+
+        <!-- Left column -->
+        <div class="stage-rail">
+          <button class="btn btn-ghost unit-label" id="open-unit">Business Unit <span>03</span><i data-icon="arrow-up-right"></i></button>
+          <div class="rail-bottom">
+            <p>Ideas. Projects.<br />And what comes next.<br /><strong>A creative center.</strong></p>
+            <span class="location">ENISo · Sousse, TN</span>
+            <button class="btn btn-ghost discover-button" id="scroll-to-work">Meet my work <i data-icon="arrow-down"></i></button>
+          </div>
+        </div>
+
+        <!-- Big photo (changes with the scene) -->
+        <div class="stage-photo" id="stage-photo">
+          <img class="main-photo" id="main-photo" src="" alt="" width="816" height="816" />
+          <span class="photo-index" id="photo-index"></span>
+          <button class="btn btn-ghost photo-action" id="photo-action"><i data-icon="arrow-up-right"></i></button>
+          <span class="photo-caption" id="photo-caption"></span>
+        </div>
+
+        <!-- Big title (changes with the scene) -->
+        <div class="stage-title" id="stage-title">
+          <span class="title-eyebrow" id="title-eyebrow"></span>
+          <h1 id="title-heading"></h1>
+        </div>
+
+        <!-- Bottom bar: the 3 scene tabs + pause button -->
+        <div class="stage-bottom">
+          <div class="scene-tabs" id="scene-tabs" role="tablist" aria-label="Portfolio scenes"></div>
+          <button class="btn btn-ghost btn-icon motion-control" id="motion-toggle" aria-label="Pause animation" title="Pause animation"><i data-icon="pause"></i></button>
+        </div>
+      </section>
+
+      <!-- ============ SECTION NAVIGATION ============ -->
+      <nav class="portfolio-navigation" aria-label="Portfolio sections">
+        <button class="btn btn-ghost" data-scroll="work">About me <i data-icon="arrow-down"></i></button>
+        <button class="btn btn-ghost" data-scroll="background">Experience &amp; more <i data-icon="arrow-down"></i></button>
+        <button class="btn btn-ghost" data-scroll="contact">Contact <i data-icon="arrow-down"></i></button>
+      </nav>
+
+      <!-- ============ SCROLLING STRIP ============ -->
+      <div class="kinetic-strip" aria-hidden="true">
+        <div class="kinetic-track" id="kinetic-track"></div>
+      </div>
+
+      <!-- ============ BIOGRAPHY + ABOUT ============ -->
+      <section class="creative-work" id="work">
+        <div class="work-heading reveal">
+          <div>
+            <span class="small-kicker">A LITTLE LESS TALK. A LITTLE MORE MAKING.</span>
+            <h2>Proof of curiosity<span>.</span></h2>
+          </div>
+          <span class="work-count">THE PERSON BEHIND THE IDEAS</span>
+        </div>
+        <div class="member-story-grid">
+          <article class="member-story reveal">
+            <span class="small-kicker">MY STORY</span>
+            <h3>Biography<span>.</span></h3>
+            <p class="member-story-copy" id="biography"></p>
+          </article>
+          <article class="member-story reveal">
+            <span class="small-kicker">IN MY OWN WORDS</span>
+            <h3>About me<span>.</span></h3>
+            <p class="member-story-copy" id="description"></p>
+          </article>
+        </div>
+      </section>
+
+      <!-- ============ SKILLS ("My playground") ============ -->
+      <section class="creative-toolkit reveal">
+        <span class="small-kicker">MY PLAYGROUND</span>
+        <div class="toolkit-line">
+          <h2>Imagine.<br />Create.<br /><span>Make it happen.</span></h2>
+          <div class="toolkit-list" id="toolkit-list"></div>
+        </div>
+      </section>
+
+      <!-- ============ EXPERIENCE / EVENTS / CERTIFICATIONS ============ -->
+      <section class="member-background reveal" id="background">
+        <div class="background-heading">
+          <div>
+            <span class="small-kicker">THE PEOPLE, PLACES &amp; MOMENTS THAT SHAPE ME</span>
+            <h2>More than projects<span>.</span></h2>
+          </div>
+          <p class="sample-caption">Illustrative entries · awaiting member details</p>
+        </div>
+        <div class="background-tabs" id="background-tabs" role="tablist" aria-label="Member background"></div>
+        <div class="background-panel" id="background-panel" role="tabpanel"></div>
+      </section>
+
+      <!-- ============ CONTACT ============ -->
+      <section class="member-contact reveal" id="contact">
+        <div>
+          <span class="small-kicker">NEW IDEAS START WITH A CONNECTION</span>
+          <h2>Let’s connect<span>.</span></h2>
+          <p>Ideas, projects, or simply a hello.</p>
+        </div>
+        <div class="contact-lines">
+          <div class="contact-line">
+            <i data-icon="mail"></i>
+            <div>
+              <span>JEENISo contact</span>
+              <a href="mailto:contact@jeeniso.com">contact@jeeniso.com</a>
+            </div>
+            <button class="btn btn-ghost btn-icon" id="copy-email" aria-label="Copy contact email" title="Copy email"><i data-icon="arrow-up-right"></i></button>
+          </div>
+          <div class="contact-line">
+            <i data-icon="map-pin"></i>
+            <div>
+              <span>Based in</span>
+              <p>Sousse, Tunisia</p>
+            </div>
+          </div>
+          <p class="sample-caption">Personal email &amp; social links awaiting member details.</p>
+          <p role="status" class="status-note status-ok" id="copy-ok" hidden>Email copied</p>
+          <p role="status" class="status-note" id="copy-fail" hidden>Copy unavailable. Email: contact@jeeniso.com</p>
+        </div>
+      </section>
+
+      <!-- ============ CLOSING BANNER ============ -->
+      <section class="creative-outro reveal">
+        <img src="images/creative-workshop.jpg" alt="Creative collective developing ideas together" width="1600" height="640" loading="lazy" />
+        <div>
+          <span class="small-kicker">ONE UNIT. ENDLESS POSSIBILITIES.</span>
+          <h2>Let’s make<br /><span>something new.</span></h2>
+          <button class="btn btn-default outro-button" id="open-contact-outro">Start a conversation <i data-icon="arrow-up-right"></i></button>
+        </div>
+      </section>
+    </main>
+
+    <!-- ============ FOOTER ============ -->
+    <footer class="creative-footer">
+      <span>JEENISo × BUSINESS UNIT 3</span>
+      <span class="sample-note">Sample member &amp; projects</span>
+      <button class="btn btn-ghost btn-icon" id="share-button" title="Copy portfolio link" aria-label="Share portfolio"><i data-icon="share-2"></i></button>
+      <span role="status" id="share-status" hidden>Link copied</span>
+    </footer>
+
+    <!-- ============================================================
+         POP-UP WINDOWS (native <dialog> elements)
+         member.js opens them with dialog.showModal()
+         ============================================================ -->
+
+    <!-- Contact pop-up -->
+    <dialog class="dlg" id="dialog-contact">
+      <div class="dlg-body">
+        <button class="dlg-close" data-close aria-label="Close"><i data-icon="x"></i></button>
+        <i data-icon="mail" data-class="dlg-mail"></i>
+        <h2 class="dlg-title">Good ideas start with hello.</h2>
+        <p class="dlg-desc">Connect with JEENISo about BU3 collaborations.</p>
+        <a class="btn btn-default" href="mailto:contact@jeeniso.com">contact@jeeniso.com <i data-icon="arrow-up-right"></i></a>
+        <p class="dlg-note">Sample member — personal links not provided yet.</p>
+      </div>
+    </dialog>
+
+    <!-- Business unit pop-up -->
+    <dialog class="dlg" id="dialog-unit">
+      <div class="dlg-body">
+        <button class="dlg-close" data-close aria-label="Close"><i data-icon="x"></i></button>
+        <img src="images/bu3_logo.png" alt="Business Unit 3 logo" class="dlg-logo" onerror="this.onerror=null;this.src='images/favicon.png'" />
+        <h2 class="dlg-title">Curious minds. One unit.</h2>
+        <p class="dlg-desc" id="unit-description"></p>
+        <button class="btn btn-default" id="unit-to-work">Meet the work <i data-icon="arrow-right"></i></button>
+      </div>
+    </dialog>
+
+    <!-- Members list pop-up (list is built by member.js from data.js) -->
+    <dialog class="dlg wide" id="dialog-members">
+      <div class="dlg-body">
+        <button class="dlg-close" data-close aria-label="Close"><i data-icon="x"></i></button>
+        <h2 class="dlg-title">The minds of BU3.</h2>
+        <p class="dlg-desc">Choose a member to explore their portfolio.</p>
+        <div class="members-list" id="members-list"></div>
+        <p class="dlg-note">Sample portfolios — personal details coming soon.</p>
+      </div>
+    </dialog>
+
+    <!-- Project details pop-up (filled by member.js) -->
+    <dialog class="dlg wide" id="dialog-project">
+      <div class="dlg-body" id="project-body"></div>
+    </dialog>
+
+    <!-- Event / certification details pop-up (filled by member.js) -->
+    <dialog class="dlg" id="dialog-detail">
+      <div class="dlg-body" id="detail-body"></div>
+    </dialog>
+
+  </div>
+
+  <!-- Order matters: data first, then shared code, then this page's code -->
+  <script src="data.js"></script>
+  <script src="common.js"></script>
+  <script src="member.js"></script>
+</body>
+</html>

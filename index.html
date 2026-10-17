@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Business Unit 3 · A creative center by JEENISo</title>
+  <meta name="description" content="Home of JEENISo Business Unit 3: meet the manager and members of a creative center developing ideas, projects and more." />
+  <meta property="og:title" content="Business Unit 3 · Where the unit comes together" />
+  <meta property="og:description" content="Meet the creative minds of JEENISo Business Unit 3." />
+  <meta property="og:type" content="website" />
+  <link rel="icon" href="images/favicon.png" type="image/png" />
+
+  <!-- Montserrat font from Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;450;500;550;600;650;700;750;800&display=swap" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<!--
+  BU3 HOME PAGE
+  -------------
+  Files used by this page:
+    style.css   : all the styles (home styles are at the END of the file)
+    data.js     : members, site info, navigation, "What we do" cards  (EDIT THIS to change content)
+    common.js   : helpers + icons shared with member.html
+    home.js     : fills the page from data.js + all the interactivity
+
+  How content is split:
+    - Titles, paragraphs and buttons that never change live HERE in the HTML.
+    - Lists and numbers (menu links, member cards, stats, footer links) are
+      created by home.js from data.js. Look for the empty tags with an id,
+      for example <div id="home-members"></div>.
+
+  <i data-icon="arrow-up-right"></i>  -> replaced by an SVG icon (common.js)
+  <i data-sparkle></i>                -> replaced by the sparkle from the logo
+  data-mailto                         -> link becomes mailto:<site.email>
+-->
+<body>
+  <div class="creative-page home-page" id="top">
+
+    <!-- ============ HEADER (sticky) ============ -->
+    <header class="site-header">
+      <a href="#top" class="site-brand" aria-label="JEENISo Business Unit 3 home">
+        <!-- If images/bu3_logo.png is missing, the small favicon logo is used instead (see README) -->
+        <img src="images/bu3_logo.png" alt="Business Unit 3 logo" onerror="this.onerror=null;this.src='images/favicon.png'" />
+        <span class="brand-link">BUSINESS UNIT 3 | <span>JEENISo</span></span>
+      </a>
+
+      <!-- The menu links are inserted here by home.js (from "navigation" in data.js) -->
+      <nav class="site-navigation" id="home-navigation" aria-label="Main navigation">
+        <a class="btn btn-ghost home-button home-button-primary site-hello" data-mailto>Say hello <i data-icon="arrow-up-right"></i></a>
+      </nav>
+
+      <!-- Menu button: only visible on phones -->
+      <button class="btn btn-ghost home-icon-button site-menu-toggle" id="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="home-navigation"><i data-icon="menu"></i></button>
+    </header>
+
+    <main>
+
+      <!-- ============ HERO ============ -->
+      <section class="home-hero" aria-label="Business Unit 3">
+        <!-- TEAM PHOTO behind the title. Empty here: home.js adds the <img> from
+             "site.heroPhoto" in data.js once the file exists. A light veil (CSS)
+             keeps the text readable. See README: "Where to put the photos". -->
+        <div class="home-hero-photo" id="hero-photo"></div>
+
+        <!-- Three blurred coloured shapes drifting in the background -->
+        <span class="home-blob home-blob-a" aria-hidden="true"></span>
+        <span class="home-blob home-blob-b" aria-hidden="true"></span>
+        <span class="home-blob home-blob-c" aria-hidden="true"></span>
+
+        <img src="images/bu3_logo.png" alt="Business Unit 3 logo" class="home-hero-logo" onerror="this.onerror=null;this.src='images/favicon.png'" />
+        <p class="home-hero-kicker"><i data-sparkle></i>JEENISo / BUSINESS UNIT 3 · <span id="hero-edition"></span></p>
+
+        <!-- The letters of "BUSINESS UNIT" are created by home.js so each one can animate in -->
+        <h1 class="home-hero-title" aria-label="Business Unit 03">
+          <span class="home-title-words" id="hero-words"></span>
+          <span class="home-letter home-outline">03</span>
+          <span class="home-period">.</span>
+        </h1>
+        <p class="home-hero-sub">A creative center by JEENISo</p>
+        <p class="home-hero-description">Ideas. Projects. And what comes next.</p>
+
+        <div class="home-hero-actions">
+          <a href="#members" class="btn btn-ghost home-button home-button-primary">Meet the unit <i data-icon="arrow-down"></i></a>
+          <a class="btn btn-ghost home-button home-button-link" data-mailto>Say hello <i data-icon="arrow-up-right"></i></a>
+        </div>
+
+        <div class="home-hero-bottom">
+          <!-- Current challenge (text comes from "site.challenge" in data.js) -->
+          <a href="#challenges" class="home-challenge-pill">
+            <span class="home-challenge-dot"></span>
+            <span>WEEK <span id="challenge-week"></span> · <span id="challenge-title"></span> · <strong id="challenge-status"></strong></span>
+            <i data-icon="arrow-up-right"></i>
+          </a>
+          <a href="#unit" class="home-scroll-cue">Scroll <i data-icon="arrow-down"></i></a>
+        </div>
+
+        <!-- Pause / resume all animations (play + pause icons: CSS shows the right one) -->
+        <button class="btn btn-ghost home-icon-button home-motion" id="motion-toggle" aria-label="Pause animation" title="Pause animation" aria-pressed="false">
+          <i data-icon="pause" data-class="home-pause-icon"></i><i data-icon="play" data-class="home-play-icon"></i>
+        </button>
+      </section>
+
+      <!-- ============ SCROLLING BANNER ============ -->
+      <div class="kinetic-strip" aria-hidden="true"><div class="kinetic-track" id="kinetic-track"></div></div>
+      
+
+      <!-- ============ 01 · THE UNIT (statement + numbers) ============ -->
+      <section class="home-story" id="unit">
+        <div class="home-manifesto reveal">
+          <span class="small-kicker home-section-kicker"><i data-sparkle></i><span class="home-section-number">01</span><span>— THE UNIT</span></span>
+          <!-- Words come from "site.manifesto" in data.js -->
+          <h2 class="home-manifesto-copy" id="manifesto-copy"></h2>
+        </div>
+
+        <div class="home-stats reveal" aria-label="Business Unit 3 in numbers">
+          <span class="home-stats-watermark" aria-hidden="true">03</span>
+          <div class="home-stat"><strong id="stat-members"></strong><span>Members</span><small id="stat-breakdown"></small></div>
+          <div class="home-stat"><strong>1</strong><span>Unit</span></div>
+          <div class="home-stat home-stat-edition"><strong id="stat-edition"></strong><span>Edition</span></div>
+        </div>
+      </section>
+
+      <!-- ============ 02 · WHAT WE DO ============ -->
+      <section class="home-capabilities" id="what-we-do">
+        <span class="small-kicker home-section-kicker"><i data-sparkle></i><span class="home-section-number">02</span><span>— WHAT WE DO</span></span>
+        <!-- The 3 photo cards come from "capabilities" in data.js -->
+        <div class="home-cap-grid" id="cap-grid"></div>
+      </section>
+
+      <!-- ============ CHALLENGES (anchor only for now) ============
+           The menu and the hero pill link here (#challenges).
+           This is the place to build the "Weekly challenges" section later. -->
+      <section id="challenges" class="home-challenges-anchor" aria-label="Challenges"><i data-sparkle></i></section>
+
+      <!-- ============ 03 · LEADERSHIP (manager card) ============ -->
+      <section class="home-manager reveal" id="leadership">
+        <div class="home-manager-card">
+          <span class="small-kicker home-section-kicker"><i data-sparkle></i><span class="home-section-number">03</span><span>— LEADING THE UNIT</span></span>
+          <h2 id="manager-title"></h2>
+          <p id="manager-text"></p>
+          <a class="btn btn-ghost home-button home-manager-button" id="manager-link">View portfolio <i data-icon="arrow-up-right"></i></a>
+
+          <!-- MANAGER PHOTO (right side of the card). home.js adds the <img> from the
+               manager's "photo" field in data.js. Until the file exists, the big
+               outlined initials are shown. Tip: a transparent PNG cut-out looks great
+               here, the initials appear behind the person. -->
+          <div class="home-manager-photo" id="manager-photo"><span class="home-manager-initials" id="manager-initials" aria-hidden="true"></span></div>
+        </div>
+      </section>
+
+      <!-- ============ 04 · MEMBERS ============ -->
+      <section class="home-unit" id="members">
+        <div class="work-heading reveal">
+          <div>
+            <span class="small-kicker home-section-kicker"><i data-sparkle></i><span class="home-section-number">04</span><span>— CURIOUS MINDS</span></span>
+            <h2>Curious minds<span class="home-period">.</span></h2>
+          </div>
+          <span class="work-count" id="members-count"></span>
+        </div>
+        <!-- One card per member, created from "members" in data.js -->
+        <div class="home-members" id="home-members"></div>
+      </section>
+
+      <!-- ============ 05 · CLOSING BANNER ============ -->
+      <section class="creative-outro home-outro reveal" id="contact">
+        <img src="images/creative-workshop.jpg" alt="BU3 creative collective together" width="1600" height="640" loading="lazy" />
+        <div>
+          <span class="small-kicker home-section-kicker"><i data-sparkle></i><span class="home-section-number">05</span><span>— ONE UNIT. ENDLESS POSSIBILITIES.</span></span>
+          <h2>Let’s make<br />something new<span class="home-period">.</span></h2>
+          <a class="btn btn-ghost home-button home-button-primary" data-mailto>Start a conversation <i data-icon="arrow-up-right"></i></a>
+        </div>
+      </section>
+    </main>
+
+    <!-- ============ FOOTER ============ -->
+    <footer class="site-footer">
+      <div class="site-footer-main">
+        <div class="site-footer-brand">
+          <div class="site-footer-brand-row">
+            <img src="images/bu3_logo.png" alt="Business Unit 3 logo" onerror="this.onerror=null;this.src='images/favicon.png'" />
+            <span class="brand-link">BUSINESS UNIT 3 | <span>JEENISo</span><span class="home-period">.</span></span>
+          </div>
+          <p>A creative center<span class="home-period">.</span></p>
+          <!-- Optional image: hidden automatically if images/jeeniso-logo.png does not exist -->
+          <img class="site-footer-jeeniso" src="images/jeeniso_logo.png" alt="JEENISo emblem" onerror="this.style.display='none'" />
+        </div>
+
+        <!-- Links are inserted here by home.js (same "navigation" list as the header) -->
+        <nav aria-label="Footer navigation"><h2>Explore<span class="home-period">.</span></h2></nav>
+
+        <div class="site-footer-contact" id="footer-contact">
+          <h2>Say hello<span class="home-period">.</span></h2>
+          <a data-mailto><span id="footer-email"></span><i data-icon="arrow-up-right"></i></a>
+          <p id="footer-location"></p>
+          <!-- Social links are added here by home.js only if "socials" in data.js is not empty -->
+        </div>
+      </div>
+      <div class="site-footer-bottom">
+        <span>BUSINESS UNIT 3 - Junior Entreprise</span>
+        <i data-sparkle></i>
+        <span id="footer-edition"></span>
+      </div>
+    </footer>
+
+    <!-- Round "back to top" button (appears after you scroll past the hero) -->
+    <a href="#top" class="btn btn-ghost home-icon-button home-back-top" aria-label="Back to top" title="Back to top"><i data-icon="arrow-up"></i></a>
+  </div>
+
+  <!-- Order matters: data first, then shared code, then this page's code -->
+  <script src="data.js"></script>
+  <script src="common.js"></script>
+  <script src="home.js"></script>
+</body>
+</html>
